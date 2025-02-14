@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-# ще створю нові apps: User, Revies, Cart
+# ще створю нові apps: User, Revies, Cart, Payments?
 
 
 class Category(models.Model):
