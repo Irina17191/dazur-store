@@ -48,6 +48,9 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    price_usd = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    # blank=True – дозволяє залишати поле порожнім у формах Django (наприклад, у Django Admin)
+    # null=True – дозволяє зберігати NULL у базі даних
     # image = models.ImageField(upload_to="products/")
     description = models.TextField()
     material = models.CharField(max_length=255)
@@ -60,7 +63,7 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return f"{self.name}   price: {self.price}"
 
     def get_available_display(self):
         """Повертає гарний текст для відображення в шаблонах"""
