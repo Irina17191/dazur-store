@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 
@@ -13,6 +14,17 @@ class CustomUser(AbstractUser):
         (CUSTOMER, "Customer"),
     ]
 
+    age = models.IntegerField(
+        validators=[
+            MinValueValidator(18, message="Age cannot be less than 2 years old"),
+            MaxValueValidator(100, message="Age cannot be more than 100 years old")
+        ],
+        verbose_name="age",
+        help_text="Please indicate your age (optional)",
+        blank=True,    # Дозволяє залишати поле порожнім у формах
+        null=True      # Дозволяє зберігати NULL у базі даних
+    )
+
     user_type = models.CharField(
         max_length=10,
         choices=USER_TYPE_CHOICES,
@@ -23,6 +35,10 @@ class CustomUser(AbstractUser):
 
     class Meta:
         ordering = ("username",)
+
+
+    def __str__(self):
+        return f"{self.username}: ({self.first_name} {self.last_name})"
 
 
     def is_admin(self):
