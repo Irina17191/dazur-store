@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-# ще створю нові apps: User, Revies, Cart, Payments?
+# ще створю нові apps: User, Revies, Cart, Payments
 
 
 class Category(models.Model):
@@ -68,3 +68,4 @@ class Product(models.Model):
     def get_available_display(self):
         """Повертає гарний текст для відображення в шаблонах"""
         return "SOLD OUT" if not self.available else "YES"
+
