@@ -12,4 +12,4 @@ def hello_world(request: HttpRequest) -> HttpResponse:
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return HttpResponse("<h1>D'AZUR</h1>")
+    return render(request, "catalog/index.html")
